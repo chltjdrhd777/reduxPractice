@@ -2,9 +2,10 @@ import React from "react";
 
 interface RowsProps {
   title: string;
+  fetchUrl: string;
 }
 
-function MovieRows({ title }: RowsProps) {
+function MovieRows({ title, fetchUrl }: RowsProps) {
   return (
     <div>
       <h2>{title}</h2>

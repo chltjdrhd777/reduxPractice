@@ -2,17 +2,22 @@ import React from "react";
 import MovieRows from "../components/movieRows";
 import { actions } from "../redux/HomeReducer";
 import { useSelector, useDispatch } from "react-redux";
-import { HomeState } from "../redux/HomeReducer";
+import { CombineState } from "../redux/combinedStore";
+import requests from "../axios/requestAPI";
+import axios from "../axios/axios";
 
 export default () => {
   const dispatch = useDispatch();
-  const homeState = useSelector((state: HomeState) => state);
-  console.log(homeState);
+  const homeState = useSelector((state: CombineState) => state);
+  console.log(homeState.homeReducer);
 
   return (
     <div>
-      <MovieRows title="hey" />
-      <MovieRows title="howAreYou" />
+      <MovieRows
+        title="NETFLIX ORIGINALS"
+        fetchUrl={requests.netflixOriginal}
+      />
+      <MovieRows title="Trending Now" fetchUrl={requests.trend} />
       <button onClick={() => dispatch(actions.testAction(Math.random()))}>
         hi
       </button>

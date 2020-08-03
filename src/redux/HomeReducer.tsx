@@ -28,4 +28,5 @@ export const homeReducer = createReducer<HomeState>(
       movies.push(action.payload);
     },
   } // every action
+  //PayloadAction = defines what this action containes as an second property
 );

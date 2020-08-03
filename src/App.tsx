@@ -13,5 +13,8 @@ function App() {
     </Router>
   );
 }
+//common process
+//1. make container and use this as an Route component
+//2. this container returns components which is really applied
 
 export default App;
