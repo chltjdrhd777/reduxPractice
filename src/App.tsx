@@ -2,7 +2,9 @@ import React from "react";
 import { HashRouter as Router, Route } from "react-router-dom";
 import Home from "./routes/home";
 import { Provider } from "react-redux";
-import { store } from "./redux/combinedStore";
+import { createStore } from "./redux/combinedStore";
+
+const store = createStore();
 
 function App() {
   return (

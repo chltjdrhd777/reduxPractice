@@ -7,4 +7,9 @@ const instance = axios.create({
   baseURL: "https://api.themoviedb.org/3",
 });
 
+export function axiosCall(url) {
+  const result = instance(url);
+  return result;
+}
+
 export default instance;

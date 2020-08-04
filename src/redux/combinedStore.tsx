@@ -2,6 +2,8 @@ import { configureStore } from "@reduxjs/toolkit";
 import { combineReducers } from "redux";
 import { homeReducer, HomeState } from "./HomeReducer";
 import logger from "redux-logger";
+import createSagaMiddleware from "redux-saga";
+import rootSaga from "./rootSaga";
 
 //! How middleware works? by redux-thunk///
 //? template structure
@@ -44,17 +46,38 @@ function thunkStructure(extraArgument?: any) {
   };
 }
 
-//! but, unfortunately, redux-thunk has implicit problem. = perlex action dummy...
+//! but, unfortunately, redux-thunk has implicit problem. = perplex action dummy...
 //! so, instead of redux-thunk, I think redux-saga is more trimmy and easy
+
+//? redux-saga
+//? saga is simple
+//it just watches all actions
+//then, NOTE! if a specific action type is called,
+//redux-saga hold middleware process and run specific function <--- looks like asynchronous, right?
+const sagaMiddleware = createSagaMiddleware();
+function* testSaga() {
+  yield console.log("work?");
+}
+//? 1. make saga middleware
+//? 2. put this into middleware array (then, the store checks this middleware whenever action dispatch occurs)
+//! 3. write a special form of saga function(function*, return = yield) and put this into createStore as sagamiddleware.run(function)
+//- the part 3 is important. if you omit this, saga middleware doesn't work in you intention
+
+///////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////
 export interface CombineState {
   homeReducer: HomeState;
 }
 
 const combine = combineReducers({ homeReducer });
-const middleware = [logger];
+const middleware = [logger, sagaMiddleware];
 
-export const store = configureStore({
-  reducer: combine,
-  middleware,
-});
+export const createStore = () => {
+  const store = configureStore({
+    reducer: combine,
+    middleware,
+  });
+  sagaMiddleware.run(rootSaga);
+  return store;
+};

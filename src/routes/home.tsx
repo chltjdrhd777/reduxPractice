@@ -4,12 +4,10 @@ import { actions } from "../redux/HomeReducer";
 import { useSelector, useDispatch } from "react-redux";
 import { CombineState } from "../redux/combinedStore";
 import requests from "../axios/requestAPI";
-import axios from "../axios/axios";
 
 export default () => {
   const dispatch = useDispatch();
   const homeState = useSelector((state: CombineState) => state);
-  console.log(homeState.homeReducer);
 
   return (
     <div>
@@ -20,6 +18,9 @@ export default () => {
       <MovieRows title="Trending Now" fetchUrl={requests.trend} />
       <button onClick={() => dispatch(actions.testAction(Math.random()))}>
         hi
+      </button>
+      <button onClick={() => dispatch(actions.movieFetchAction())}>
+        for saga
       </button>
     </div>
   );
