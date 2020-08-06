@@ -1,7 +1,9 @@
-import { all, fork } from "redux-saga/effects";
+import { all } from "redux-saga/effects";
 
-import homeSaga from "./HomeReducer";
+import { HomeSagas } from "./HomeReducer";
 
 export default function* rootSaga() {
-  yield all([fork(homeSaga)]);
+  yield all([HomeSagas()]);
 }
+// yield = return
+//all([...]) =activate all sagas in the array
