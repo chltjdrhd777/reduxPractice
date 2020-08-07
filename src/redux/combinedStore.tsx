@@ -2,23 +2,25 @@ import { configureStore } from "@reduxjs/toolkit";
 import { combineReducers } from "redux";
 import { homeReducer, HomeState } from "./HomeReducer";
 import logger from "redux-logger";
-import createSagaMiddleware from "redux-saga";
-import rootSaga from "./rootSaga";
-
-const sagaMiddleware = createSagaMiddleware();
+import ReduxThunk from "redux-thunk";
 
 export interface CombineState {
   homeReducer: HomeState;
 } // to allow other components to use
 
 const combine = combineReducers({ homeReducer });
-const middleware = [sagaMiddleware, logger];
+const middleware = [logger, ReduxThunk];
 
 export const createStore = () => {
   const store = configureStore({
     reducer: combine,
     middleware,
   });
-  sagaMiddleware.run(rootSaga);
   return store;
 };
+
+// ?middleware concept
+//1. when action is dispatched,
+//2. go through middleware
+//3. if these middleware doen't return next(action) => actions are not delivered to reducer(do nothing further)
+//4. redux-thunk : can react to "function structure" action
