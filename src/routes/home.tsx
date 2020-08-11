@@ -27,5 +27,9 @@ export default () => {
 const GloabalCSS = createGlobalStyle`
   * {
     margin:0;
-  }
+  };
+  body{
+    background-color:#111;
+    color:white;
+  };
 `;

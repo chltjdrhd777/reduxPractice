@@ -5,7 +5,7 @@ import { createAction, createReducer, PayloadAction } from "@reduxjs/toolkit";
 
 //!createReducer
 export interface HomeState {
-  banner: {};
+  banner: any;
 }
 
 //? actions //
@@ -17,7 +17,7 @@ export const actions = { banner }; // just for unification of actions
 
 //? reducer //
 export const homeReducer = createReducer<HomeState>(
-  { banner: [] }, //state structure
+  { banner: {} }, //state structure
   {
     [banner.type]: (state: HomeState, action: PayloadAction<any>) => {
       state.banner = action.payload;

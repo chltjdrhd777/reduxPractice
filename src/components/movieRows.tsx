@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { CombineState } from "../redux/combinedStore";
+import { useDispatch } from "react-redux";
 import axios from "../axios/axios";
 import { actions } from "../redux/HomeReducer";
 import requests from "../axios/requestAPI";
@@ -16,13 +15,12 @@ export interface MoviesDataType {
   results: [];
 }
 
-const base_url = "https://image.tmdb.org/t/p/original/";
+export const base_url = "https://image.tmdb.org/t/p/original/";
 
 function MovieRows({ title, fetchUrl, isLargePoster }: RowsProps) {
-  const stateCheckor = useSelector((store: CombineState) => store);
-
   const [movies, setMovies] = useState<{}[]>([]);
   const dispatch = useDispatch();
+
   useEffect(() => {
     async function fetchData() {
       const request = await axios.get(fetchUrl);
@@ -50,6 +48,9 @@ function MovieRows({ title, fetchUrl, isLargePoster }: RowsProps) {
             alt={el.name}
             key={el.id}
             isLargePoster={isLargePoster}
+            onClick={() => {
+              console.log("works");
+            }}
           />
         ))}
       </Posts>
