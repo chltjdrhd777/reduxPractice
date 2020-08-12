@@ -4,6 +4,10 @@ import axios from "../axios/axios";
 import { actions } from "../redux/HomeReducer";
 import requests from "../axios/requestAPI";
 import styled from "styled-components";
+import YouTube from "react-youtube";
+
+import { useSelector } from "react-redux";
+import { CombineState } from "../redux/combinedStore";
 
 interface RowsProps {
   title: string;
@@ -20,6 +24,7 @@ export const base_url = "https://image.tmdb.org/t/p/original/";
 function MovieRows({ title, fetchUrl, isLargePoster }: RowsProps) {
   const [movies, setMovies] = useState<{}[]>([]);
   const dispatch = useDispatch();
+  const { id } = useSelector((store: CombineState) => store.homeReducer.banner);
 
   useEffect(() => {
     async function fetchData() {
@@ -49,11 +54,21 @@ function MovieRows({ title, fetchUrl, isLargePoster }: RowsProps) {
             key={el.id}
             isLargePoster={isLargePoster}
             onClick={() => {
-              console.log("works");
+              dispatch(actions.banner(el));
             }}
           />
         ))}
       </Posts>
+      {id ? (
+        <YouTube
+          videoId="XtMThy8QKqU"
+          opts={{
+            height: "300px",
+            width: "300px",
+            playerVars: { autoplay: 0 },
+          }}
+        />
+      ) : null}
     </Row>
   );
 }

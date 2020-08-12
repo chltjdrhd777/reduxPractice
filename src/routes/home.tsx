@@ -3,11 +3,13 @@ import MovieRows from "../components/movieRows";
 import requests from "../axios/requestAPI";
 import { createGlobalStyle } from "styled-components";
 import Banner from "../components/banner";
+import Nav from "../components/navBar";
 
 export default () => {
   return (
     <div>
       <GloabalCSS />
+      <Nav />
       <Banner />
       <MovieRows
         title="NETFLIX ORIGINALS"

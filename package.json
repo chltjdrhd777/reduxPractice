@@ -12,10 +12,12 @@
     "@types/react-dom": "^16.9.8",
     "@types/react-router-dom": "^5.1.5",
     "axios": "^0.19.2",
+    "movie-trailer": "^2.0.6",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
+    "react-youtube": "^7.11.3",
     "styled-components": "^5.1.1",
     "typescript": "^3.7.5"
   },
